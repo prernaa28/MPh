@@ -1,7 +1,7 @@
 clear
 funcprot(0)
 function f=F(x)
-    sigma=0.01
+    sigma=0.1
     f=exp(-((x-2)^2)/(2*sigma^2))*(x+3)/sqrt(2*sigma^2*%pi)
 endfunction
 n=3000
