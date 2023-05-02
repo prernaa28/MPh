@@ -141,8 +141,8 @@ end
 disp(an)
 disp(bn)
 disp(a0)
-x=1:.1:100
-sum=0
+x=1:.1:20
+sum=a0(1)
 for i=1:20
     sum=sum+(an(i)*cos((i*%pi*x)/l))+(bn(i)*sin((i*%pi*x)/l))
 end
