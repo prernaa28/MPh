@@ -1,0 +1,23 @@
+clear
+funcprot(0)
+function f=F(x)
+    sigma=0.01
+    f=exp(-((x-2)^2)/(2*sigma^2))*(x+3)/sqrt(2*sigma^2*%pi)
+endfunction
+n=3000
+a=-10
+b=10
+h=(b-a)/n
+sum=0
+x(1)=a
+x(n+1)=b
+for i=1:n-1
+    x(i+1)=x(i)+h
+    if(modulo(i,2)==1) then
+        sum=sum+2*F(x(i+1))
+    else
+        sum=sum+4*F(x(i+1))
+    end 
+end
+sol=(F(a)+F(b)+sum)*h/3
+disp(sol)
