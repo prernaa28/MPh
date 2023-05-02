@@ -79,3 +79,73 @@ for t=0:5
     a.y_location="origin"
 end
 
+//without subplots
+
+funcprot(0)
+function f=F1(x,l,n1)
+    f=-2*cos(n1*%pi*x/l)
+endfunction
+function f=F2(x,l,n1)
+    f=2*cos(n1*%pi*x/l)
+endfunction
+function f=F3(x,l,n1)
+    f=-2*sin(n1*%pi*x/l)
+endfunction
+function f=F4(x,l,n1)
+    f=2*sin(n1*%pi*x/l)
+endfunction
+function f=F5(x,l,n1)
+    f=-2
+endfunction
+function f=F6(x,l,n1)
+    f=2
+endfunction
+function y=g(x,h,F,l,n1)
+    sum=0
+    for i=1:n-1
+        x(i+1)=x(i)+h
+        if (modulo(i,2)==1) then
+            sum=sum+2*F(x(i+1),l,n1)
+        else
+            sum=sum+4*F(x(i+1),l,n1)
+        end
+    end
+    y=(sum+F(a)+F(b))*h/3
+endfunction
+an=[]
+bn=[]
+a0=[]
+for i=1:100
+n=300
+a=-10
+b=0
+l=10
+x(1)=a
+x(n+1)=b
+h=(b-a)/n
+sol1=g(x,h,F1,l,i)
+sol3=g(x,h,F3,l,i)
+sol5=g(x,h,F5,l,i)
+a=0
+b=10
+h=(b-a)/n
+x(1)=a
+x(n+1)=b
+sol2=g(x,h,F2,l,i)
+sol4=g(x,h,F4,l,i)
+sol6=g(x,h,F6,l,i)
+an(i)=(sol1+sol2)/l
+bn(i)=(sol3+sol4)/l
+a0(i)=(sol5+sol6)/2*l
+end
+disp(an)
+disp(bn)
+disp(a0)
+x=1:.1:100
+sum=0
+for i=1:20
+    sum=sum+(an(i)*cos((i*%pi*x)/l))+(bn(i)*sin((i*%pi*x)/l))
+end
+y=sum
+plot2d(x,y,3)
+xgrid(4)
