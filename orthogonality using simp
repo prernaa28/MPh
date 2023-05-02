@@ -1,0 +1,35 @@
+//Orthogonality of Legendre's using Simpsons
+clear
+funcprot
+function pl=p(n,x)
+    sum=0
+    for m=0:n/2
+    den=factorial(m)*factorial(n-m)*(2^n)*factorial(n-2*m)
+    sum=sum+((-1)^m)*factorial(2*n-2*m)*(x.^(n-2*m))/den
+    pl=sum
+    end
+endfunction
+A=input("Enter the value of m = ")
+B=input("Enter the value of n = ")
+a=-1
+b=1
+m=300
+h=(b-a)/m
+sum1=p(A,a)*p(B,a)+p(A,a)*p(B,b)
+sum2=0
+x(1)=a
+x(1+m)=b
+for i=2:m
+    x(i)=x(i-1)+h
+    if(modulo(i,2)==0) then
+        sum2=sum2+4*p(A,x(i))*p(B,x(i))
+    else 
+        sum2=sum2+2*p(A,x(i))*p(B,x(i))
+end
+end
+disp("Result from Simpsons formula: ", (sum1+sum2)*h/3)
+if(A==B) then
+    disp("Calculated from formula: ",2/(2*A+1))
+else
+    disp("Calculated from formula: ",0)
+    end
